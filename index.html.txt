@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Erummmm ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: radial-gradient(circle at top,#1a001f,#000000);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+h1{
+margin-top:120px;
+font-size:28px;
+padding:0 20px;
+}
+
+button{
+padding:12px 28px;
+border:none;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
+position:absolute;
+transition:0.3s;
+}
+
+#yes{
+background:#ff0055;
+color:white;
+left:55%;
+top:60%;
+box-shadow:0 0 20px #ff0055;
+}
+
+#no{
+background:white;
+color:black;
+left:30%;
+top:60%;
+}
+
+#success{
+display:none;
+padding-top:100px;
+}
+
+.ring{
+font-size:90px;
+animation:pop 1s ease forwards;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1.2);}
+}
+
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+background:#ff0055;
+border-radius:50%;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:translate(0,0);opacity:1;}
+100%{transform:translate(var(--x),var(--y));opacity:0;}
+}
+
+iframe{
+display:none;
+}
+
+@media(max-width:600px){
+h1{font-size:22px;}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Will you be my Valentine Erummmm? ❤️</h1>
+
+<button id="yes">Yes 😘</button>
+<button id="no">No 😢</button>
+
+<div id="success">
+<h1>She said YES! 💖</h1>
+<div class="ring">💍</div>
+</div>
+
+<!-- Romantic part auto start (1:10 sec approx) -->
+<iframe id="music"
+src="https://www.youtube.com/embed/5Y1rj1FzFqY?start=70&autoplay=1&loop=1&playlist=5Y1rj1FzFqY"
+allow="autoplay">
+</iframe>
+
+<script>
+let noBtn=document.getElementById("no");
+let yesBtn=document.getElementById("yes");
+let success=document.getElementById("success");
+let question=document.getElementById("question");
+
+let size=1;
+
+noBtn.addEventListener("click",()=>{
+size-=0.15;
+
+if(size<=0.3){
+noBtn.style.display="none";
+}else{
+noBtn.style.transform="scale("+size+")";
+
+let x=Math.random()*(window.innerWidth-100);
+let y=Math.random()*(window.innerHeight-50);
+
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+}
+});
+
+yesBtn.addEventListener("click",()=>{
+question.style.display="none";
+yesBtn.style.display="none";
+noBtn.style.display="none";
+success.style.display="block";
+launchFireworks();
+});
+
+function launchFireworks(){
+for(let i=0;i<120;i++){
+let fire=document.createElement("div");
+fire.classList.add("firework");
+
+fire.style.left=window.innerWidth/2+"px";
+fire.style.top=window.innerHeight/2+"px";
+
+let angle=Math.random()*2*Math.PI;
+let radius=Math.random()*250;
+
+fire.style.setProperty('--x',Math.cos(angle)*radius+"px");
+fire.style.setProperty('--y',Math.sin(angle)*radius+"px");
+
+document.body.appendChild(fire);
+setTimeout(()=>fire.remove(),1000);
+}
+}
+</script>
+
+</body>
+</html>
